@@ -1,5 +1,6 @@
 from hangman_game import Hangman
 
+
 def main():
     game = Hangman()
     game.start()
