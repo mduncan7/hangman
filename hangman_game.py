@@ -14,8 +14,17 @@ def run_game():
 
     while not game_ended:
         print("Playing...")
-        game_ended = True
+        print(_the_word)  # Temporary print for feedback
 
+        display_ui(_correct_display, _incorrect_guesses)
+        _guess = input("Guess a letter!")
+        _correct_display, _incorrect_guesses = check_guess(_guess, _the_word, _correct_display, _incorrect_guesses)
+        if len(_incorrect_guesses) == max_wrong_guesses:
+            print("You lose, good day sir.")
+            game_ended = True
+        elif has_won(_correct_display):
+            print("You win!")
+            game_ended = True
     print("Bye.")
 
 
