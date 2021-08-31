@@ -22,7 +22,7 @@ def run_game():
         if len(_incorrect_guesses) == max_wrong_guesses:
             print("You lose, good day sir.")
             game_ended = True
-        elif has_won(_correct_display):
+        elif has_won(_correct_display, _the_word):
             print("You win!")
             game_ended = True
     print("Bye.")
@@ -47,12 +47,16 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
     incorrect_guess.append(guess)
-    print("I have checked the guess")
+    print("I have checked the guess.")
     return correct_display, incorrect_guess
 
 
-def has_won(correct_display: list) -> bool:
-    # True if correct display is the same as the word
-    # This could be either that there are no longer any `None` values
-    # or the list could be converted to a string and checked against the word.
-    return True
+def has_won(correct_display: list, the_word: str) -> bool:
+    """
+    Check if the combined letters of `correct_display` are equal to `the_word`.
+
+    :param correct_display:
+    :param the_word:
+    :return:
+    """
+    return the_word == "".join(map(str, correct_display))
