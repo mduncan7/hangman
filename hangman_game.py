@@ -46,8 +46,12 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 
 
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
+    if guess in word:
+        guess_index = word.find(guess)
+        correct_display = correct_display[:guess_index] + [guess] + correct_display[guess_index+1:]
     if guess not in word:
         incorrect_guess.append(guess)
+        print("Incorrect guess.")
     print("I have checked the guess.")
     return correct_display, incorrect_guess
 
