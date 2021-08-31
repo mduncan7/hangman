@@ -46,7 +46,7 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 
 
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
-    if guess not in correct_display:
+    if guess not in word:
         incorrect_guess.append(guess)
     print("I have checked the guess.")
     return correct_display, incorrect_guess
