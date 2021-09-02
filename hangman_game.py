@@ -49,7 +49,8 @@ def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: l
     if guess in word:
         guess_index = word.find(guess)
         correct_display = correct_display[:guess_index] + [guess] + correct_display[guess_index+1:]
-    if guess not in word:
+        print("Correct.")
+    else:
         incorrect_guess.append(guess)
         print("Incorrect guess.")
     print("I have checked the guess.")
