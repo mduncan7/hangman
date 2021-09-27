@@ -46,23 +46,43 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 
 
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
+    """
+
+    :param guess:
+    :param word:
+    :param correct_display:
+    :param incorrect_guess:
+    :return:
+    """
     if guess in correct_display or guess in incorrect_guess:
         print('You already guessed that letter.')
     elif not guess.isalpha() or not len(guess) == 1:
         print('Make sure your guess is a single letter.')
     elif guess in word:
-        guess_index = 0
-        while guess_index < len(word):
-            guess_index = word.find(guess, guess_index)
-            if guess_index == -1:
-                break
-            correct_display = correct_display[:guess_index] + [guess] + correct_display[guess_index + 1:]
-            guess_index += 1
+        _populate_correct_display(word, guess, correct_display)
         print('Correct')
     else:
         incorrect_guess.append(guess)
         print("Incorrect guess.")
     return correct_display, incorrect_guess
+
+
+def _populate_correct_display(word, guess, correct_display):
+    """
+
+    :param word:
+    :param guess:
+    :param correct_display:
+    :return:
+    """
+    guess_index = 0
+    while guess_index < len(word):
+        guess_index = word.find(guess, guess_index)
+        if guess_index == -1:
+            # str.find() returns -1 if value is not found.
+            break
+        correct_display[guess_index] = guess
+        guess_index += 1
 
 
 def has_won(correct_display: list, the_word: str) -> bool:
