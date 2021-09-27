@@ -6,7 +6,7 @@ WORDLIST_PATH = "assets/words.txt"  # TODO: don't make this hardcoded
 def run_game():
     print("Welcome to Hangman 2022!")
 
-    max_wrong_guesses = 2
+    max_wrong_guesses = 3
     game_ended = False
     _the_word = pick_word()
     _correct_display = [None for _ in _the_word]
@@ -46,7 +46,24 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 
 
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
-    incorrect_guess.append(guess)
+    if guess in correct_display or guess in incorrect_guess:
+        print('You already guessed that letter.')
+        return correct_display, incorrect_guess
+    if not guess.isalpha() or not len(guess) == 1:
+        print('Make sure your guess is a single letter.')
+        return correct_display, incorrect_guess
+    if guess in word:
+        guess_index = 0
+        while guess_index < len(word):
+            guess_index = word.find(guess, guess_index)
+            if guess_index == -1:
+                break
+            correct_display = correct_display[:guess_index] + [guess] + correct_display[guess_index + 1:]
+            guess_index += 1
+        print('Correct')
+    else:
+        incorrect_guess.append(guess)
+        print("Incorrect guess.")
     print("I have checked the guess.")
     return correct_display, incorrect_guess
 
