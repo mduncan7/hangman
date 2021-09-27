@@ -48,11 +48,9 @@ def display_ui(correct_display: list, incorrect_guesses: list) -> None:
 def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: list):
     if guess in correct_display or guess in incorrect_guess:
         print('You already guessed that letter.')
-        return correct_display, incorrect_guess
-    if not guess.isalpha() or not len(guess) == 1:
+    elif not guess.isalpha() or not len(guess) == 1:
         print('Make sure your guess is a single letter.')
-        return correct_display, incorrect_guess
-    if guess in word:
+    elif guess in word:
         guess_index = 0
         while guess_index < len(word):
             guess_index = word.find(guess, guess_index)
@@ -64,7 +62,6 @@ def check_guess(guess: str, word: str, correct_display: list, incorrect_guess: l
     else:
         incorrect_guess.append(guess)
         print("Incorrect guess.")
-    print("I have checked the guess.")
     return correct_display, incorrect_guess
 
 
